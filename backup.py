@@ -40,6 +40,9 @@ for root, subdirs, files in os.walk(BASE_DIR):
             total_size += os.path.getsize(f)
         elif (t_remote < t_local):
             total_size += os.path.getsize(f)
+        if (f_local.endswith('.DS_Store') or '/__' in f_local.replace('\\', '/') or f_local.startswith('__')):
+            # skip .DS_Store files and files/folders beginning with '__'
+            total_size -= os.path.getsize(f)
 
 storage_class = {
     'StorageClass': 'GLACIER'
